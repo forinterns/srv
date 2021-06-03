@@ -1,16 +1,13 @@
 package main
 
 import (
-	"github.com/forinterns/srv/internal/handlers/get"
+	"github.com/forinterns/srv/internal/router"
 	"net/http"
 )
 
 func main() {
-	addEmployee := add.New()
-	//getEmployee := get.New()
-	addEmployeeHandler := http.HandlerFunc(addEmployee.Handle)
-	//getEmployeeHandler := http.HandlerFunc(getEmployee.Handle)
-	http.Handle("/employee/add", addEmployeeHandler)
-	//http.Handle("/employee/get", getEmployeeHandler)
+	for url, handlerFunc := range router.NewRoutes().Get() {
+		http.Handle(url, handlerFunc)
+	}
 	http.ListenAndServe(":8080", nil)
 }

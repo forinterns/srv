@@ -1,9 +1,8 @@
-package add
+package get
 
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 	"github.com/forinterns/srv/internal"
 	"github.com/forinterns/srv/internal/model"
 	"net/http"
@@ -26,6 +25,7 @@ func (h *Handler) Handle(w http.ResponseWriter, r *http.Request) {
 	var unmarshalErr *json.UnmarshalTypeError
 
 	decoder := json.NewDecoder(r.Body)
+	decoder.DisallowUnknownFields()
 	err := decoder.Decode(&e)
 	if err != nil {
 		if errors.As(err, &unmarshalErr) {
@@ -35,8 +35,7 @@ func (h *Handler) Handle(w http.ResponseWriter, r *http.Request) {
 		}
 		return
 	}
-	fmt.Println(e)
-	// написать код добавления записи в сущности Employee БД и вернуть его ID
-	internal.ErrorResponse(w, "success", http.StatusOK)
+	// написать код вывода данных из БД по ID
+	internal.ErrorResponse(w, "result", http.StatusOK)
 	return
 }
