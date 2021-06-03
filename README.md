@@ -2,7 +2,8 @@
 1) подключения к БД (Mysql/Postgres)
 2) в для хэндлеров add добавить код который позволит записать данные и вернет ID, get отдаст данные по ID
 структура запроса add
- ```curl --location --request POST 'http://localhost:8080/employee/add' \
+ ```
+curl --location --request POST 'http://localhost:8080/employee/add' \
  --header 'Content-Type: application/json' \
  --data-raw '{
    "name": "name",
